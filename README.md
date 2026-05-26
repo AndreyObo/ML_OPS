@@ -18,7 +18,7 @@ Swagger с api будет доступен на http://localhost:5000/docs
 
 https://hub.docker.com/repository/docker/andreyselfid/ml_ops-ml-service/general
 
-## Фреймворк
+## Веб-сервис и фреймворк
 
 Я решил использовать APIFlask это современный фреймворк на базе Flask с ключевыми характеристиками:
 
@@ -27,6 +27,12 @@ https://hub.docker.com/repository/docker/andreyselfid/ml_ops-ml-service/general
 - Сериализация — автоматическое форматирование ответов согласно схеме
 - Заточен исключительно для API, без html шаблонов и прочего
 - Удобные декораторы для route 
+
+## Документация API
+Я использую встроенную поддержку OpenAPI и Swagger UI. 
+Для этого используем типизацию маршрутов через декораторы ApiFlask
+Так как я чаще работаю с FastApi и привык к моделям Pydantic в проекте ml-service использую именно их. 
+А в проекте logger я попробовал встроенные Schema, что оказалось тоже удобно.
 
 ## Преобразование модели в ONNX-ML
 
