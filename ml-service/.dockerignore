@@ -1,0 +1,8 @@
+*.pyc
+src/data/
+src/model_creator.py
+activate.ps1
+train_model.bat
+src/train_models/
+.env
+README.md

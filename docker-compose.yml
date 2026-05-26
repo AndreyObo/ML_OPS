@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  log-service:
+    build: ./logger
+    container_name: logger
+    environment:
+      - PYTHONUNBUFFERED=1 
+    networks:
+      - app-net
+
+  ml-service:
+    build: ./ml-service
+    container_name: ml-service
+    ports:
+      - "5000:5000"
+    environment:
+      - LOG_URL=http://log-service:5002/log
+    depends_on:
+      - log-service
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
