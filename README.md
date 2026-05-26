@@ -2,6 +2,12 @@
 
 Для запуска проекта достаточно выполнить скрипт up.ps1 который соберет и запустит все контейнеры в docker compose
 
+Swagger с api будет доступен на http://localhost:5000/docs
+
+Для обучения модели выполнить train_model.bat
+
+Важно: Для обучения в папке data должен быть файл UCI_Credit_Card.csv
+
 ## Логирование 
 
 Для имитации логов был разработан сервис logger. Его работу можно посмотреть в Logs контейнера в docker. 
@@ -12,20 +18,15 @@
 
 https://hub.docker.com/repository/docker/andreyselfid/ml_ops-ml-service/general
 
-## Инициализация проекта ml-service:
+## Фреймворк
 
-В корне проекта:
+Я решил использовать APIFlask это современный фреймворк на базе Flask с ключевыми характеристиками:
 
-- python -m venv venv
-- .\venv\Scripts\activate
-- pip install -r requirements.txt
-- python -m src.app
-
-Swagger с api будет доступен на http://localhost:5000/docs
-
-Для обучения модели выполнить train_model.bat
-
-Важно: Для обучения в папке data должен быть файл UCI_Credit_Card.csv
+- Автодокументация — Swagger UI и OpenAPI 
+- Валидация — встроенная проверка входных данных через схемы
+- Сериализация — автоматическое форматирование ответов согласно схеме
+- Заточен исключительно для API, без html шаблонов и прочего
+- Удобные декораторы для route 
 
 ## Преобразование модели в ONNX-ML
 
