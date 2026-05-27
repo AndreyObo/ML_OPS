@@ -1,8 +1,24 @@
+## Описание проекта
+
+Данный проект представляет ML сервис для прогнозирования дефолта по кредитным картам. 
+Принимает данные о клиенте через REST API и возвращает предсказание о вероятности дефолта по кредиту.
+
 ## Запуск проекта
+
+### Docker Compose
 
 Для запуска проекта достаточно выполнить скрипт up.ps1 который соберет и запустит все контейнеры в docker compose
 
 Swagger с api будет доступен на http://localhost:5000/docs
+
+### Локально 
+
+В корне проекта ml-service:
+
+- python -m venv venv
+- .\venv\Scripts\activate или activate.ps1
+- pip install -r requirements.txt
+- python -m src.app
 
 Для обучения модели выполнить train_model.bat
 
@@ -14,7 +30,9 @@ Swagger с api будет доступен на http://localhost:5000/docs
 
 В проекте ml-service мы логируем http://localhost:5000/prediction запросы и в качестве демонстрации выводим в Logs нашего сервиса logger сгенерированные моковые sql INSERT запросы к БД.
 
-Сервисы связанные через виртуальную сеть docker
+Сервисы связанные через виртуальную сеть docker.
+
+Ссылка на сервис помещается в пременнst окружения. Если она не определена, логирование просто отключается. Код в my_logger.py.
 
 ## Образ на Docker Hub
 
@@ -36,6 +54,11 @@ https://hub.docker.com/repository/docker/andreyselfid/ml_ops-ml-service/general
 
 Так как я чаще работаю с FastApi и привык к моделям Pydantic в проекте ml-service использую именно их. 
 А в проекте logger я попробовал встроенные Schema, что оказалось тоже удобно.
+
+## Пример curl запроса с сервису
+
+curl -X POST http://localhost:5000/prediction -H "Content-Type: application/json" 
+-d '{"AGE":0,"BILL_AMT1":0,"BILL_AMT2":0,"BILL_AMT3":0,"BILL_AMT4":0,"BILL_AMT5":0,"BILL_AMT6":0,"EDUCATION":0,"LIMIT_BAL":0,"MARRIAGE":0,"PAY_0":0,"PAY_2":0,"PAY_3":0,"PAY_4":0,"PAY_5":0,"PAY_6":0,"PAY_AMT1":0,"PAY_AMT2":0,"PAY_AMT3":0,"PAY_AMT4":0,"PAY_AMT5":0,"PAY_AMT6":0,"SEX":0}'
 
 ## Преобразование модели в ONNX-ML
 
